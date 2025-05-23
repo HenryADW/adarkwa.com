@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henry Adarkwa - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-extrabold mb-10 text-center text-gray-800 tracking-tight;
+        }
+        .glass {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 32px 0 rgba(31,41,55,0.10);
+        }
+        .card {
+            @apply glass p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300;
+        }
+        .tag {
+            @apply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mr-2 mb-2 inline-block;
+        }
+        nav a {
+            @apply px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(118,75,162,0.3) 0%, rgba(102,126,234,0.3) 100%);
+            z-index: 0;
+        }
+        .project-card img {
+            aspect-ratio: 16/9;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        .project-card:hover img {
+            transform: scale(1.04) rotate(-1deg);
+        }
+        .project-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 8px 32px 0 rgba(31,41,55,0.18);
+        }
+        /* Hide scrollbars on mobile for nav */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-700 leading-relaxed">
+
+    <!-- Responsive Navbar -->
+    <nav class="bg-white/80 glass shadow-md sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#home" class="text-xl font-bold text-blue-700">Henry Adarkwa</a>
+                <button id="nav-toggle" class="md:hidden text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div id="nav-menu" class="hidden md:flex space-x-2">
+                    <a href="#home">Home</a>
+                    <a href="#summary">Summary</a>
+                    <a href="#education">Education</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#hobbies">Hobbies</a>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="nav-mobile" class="md:hidden hidden flex-col space-y-2 mt-2 pb-2">
+                <a href="#home">Home</a>
+                <a href="#summary">Summary</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#hobbies">Hobbies</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-bg text-white py-24 px-4 md:px-8 relative">
+        <div class="container mx-auto flex flex-col items-center justify-center text-center relative z-10">
+            <img src="https://placehold.co/160x160/667EEA/FFFFFF?text=HA" alt="Avatar" class="w-40 h-40 rounded-full border-4 border-white shadow-lg mb-6 object-cover">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Henry Adarkwa</h1>
+            <p class="text-xl md:text-2xl mb-8 font-medium drop-shadow">Computer Science Graduate & Software Engineer</p>
+            <div class="flex flex-wrap justify-center gap-4 text-lg">
+                <a href="tel:+447716220814" class="hover:text-blue-300 transition-colors duration-300 flex items-center"><i class="fas fa-phone mr-2"></i>+44 7716 220814</a>
+                <a href="mailto:henry@adarkwa.com" class="hover:text-blue-300 transition-colors duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>henry@adarkwa.com</a>
+                <a href="https://www.linkedin.com/in/henryka/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-300 transition-colors duration-300 flex items-center"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
+                <a href="https://github.com/HenryADW" target="_blank" rel="noopener noreferrer" class="hover:text-blue-300 transition-colors duration-300 flex items-center"><i class="fab fa-github mr-2"></i>GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="summary" class="py-16 px-4 md:px-8">
+        <div class="container mx-auto">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="max-w-3xl mx-auto glass p-8 rounded-2xl shadow-lg text-center">
+                <p class="text-lg md:text-xl">
+                    Computer science master's graduate with experience in Python, Java, and more. Confident with AWS and GCP, with extensive knowledge of CI/CD pipelines and containers. Passionate about building scalable, reliable solutions and collaborating in diverse teams.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="bg-gray-200/70 py-16 px-4 md:px-8">
+        <div class="container mx-auto">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-600">Education</h3>
+                    <div class="mb-4">
+                        <h4 class="text-xl font-medium">University of Sussex</h4>
+                        <p class="text-gray-600">MComp Computer Science (Integrated Masters)</p>
+                        <p class="text-gray-500 text-sm">2019 – 2023</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-600">Certifications</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Google Cloud Certified Cloud Digital Leader</li>
+                        <li>AWS Certified Cloud Practitioner</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-16 px-4 md:px-8">
+        <div class="container mx-auto">
+            <h2 class="section-title">Skills</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="card mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Programming Languages & Databases</h3>
+                    <div>
+                        <span class="tag">Java</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Markdown</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </div>
+                <div class="card mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Tools & Technologies</h3>
+                    <div>
+                        <span class="tag">Docker</span>
+                        <span class="tag">GCP</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Vagrant</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">ZFS</span>
+                        <span class="tag">VirtualBox</span>
+                    </div>
+                </div>
+                <div class="card mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Operating Systems & Development Tools</h3>
+                    <div>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Windows</span>
+                        <span class="tag">macOS</span>
+                        <span class="tag">Bash</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Trello</span>
+                        <span class="tag">Obsidian</span>
+                        <span class="tag">Microsoft 365</span>
+                        <span class="tag">Google Workspace</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Soft Skills</h3>
+                    <div>
+                        <span class="tag">Strong verbal/written communication</span>
+                        <span class="tag">Interpersonal skills</span>
+                        <span class="tag">Teamwork</span>
+                        <span class="tag">Problem solving</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="bg-gray-200/70 py-16 px-4 md:px-8">
+        <div class="container mx-auto">
+            <h2 class="section-title">Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card project-card">
+                    <a href="https://github.com/h0nter/ESRS-diplomacy" target="_blank" rel="noopener noreferrer">
+                        <img src="https://placehold.co/600x400/764BA2/FFFFFF?text=Web+Game" alt="Web Game Placeholder" class="w-full rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+Not+Found';">
+                    </a>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-600">
+                        <a href="https://github.com/h0nter/ESRS-diplomacy" target="_blank" rel="noopener noreferrer" class="hover:underline">Web Game</a>
+                    </h3>
+                    <div class="mb-3">
+                        <span class="tag">Python</span>
+                        <span class="tag">Django</span>
+                        <span class="tag">GraphQL</span>
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">GitHub Actions</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>Used GitHub projects board to delegate work.</li>
+                        <li>Django managed backend and database with GraphQL.</li>
+                        <li>AWS hosted microservices for the game.</li>
+                        <li>CI workflow to test and push builds from GitHub.</li>
+                    </ul>
+                </div>
+
+                <div class="card project-card">
+                    <img src="https://placehold.co/600x400/667EEA/FFFFFF?text=Game+Controllers" alt="Modified Game Controllers Placeholder" class="w-full rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+Not+Found';">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-600">Modified Game Controllers</h3>
+                    <div class="mb-3">
+                        <span class="tag">Soldering</span>
+                        <span class="tag">E-commerce</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>Repaired broken controllers by desoldering and replacing parts.</li>
+                        <li>Managed an online store for custom orders and progress tracking.</li>
+                    </ul>
+                </div>
+
+                <div class="card project-card">
+                    <a href="https://app.intangibles.me/intangibles.html" target="_blank" rel="noopener noreferrer">
+                        <img src="https://placehold.co/600x400/764BA2/FFFFFF?text=Volunteering+App" alt="Volunteering App Placeholder" class="w-full rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+Not+Found';">
+                    </a>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-600">
+                        <a href="https://app.intangibles.me/intangibles.html" target="_blank" rel="noopener noreferrer" class="hover:underline">Volunteering App</a>
+                    </h3>
+                    <div class="mb-3">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Expo</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Google Maps</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>Firebase for realtime database and maps integration.</li>
+                        <li>Firebase for user authentication and remote configuration.</li>
+                        <li>React Expo for cross-platform mobile app front end.</li>
+                    </ul>
+                </div>
+
+                <div class="card project-card">
+                    <a href="https://app.intangibles.me/vida.html" target="_blank" rel="noopener noreferrer">
+                        <img src="https://placehold.co/600x400/667EEA/FFFFFF?text=Motivational+App" alt="Motivational App Placeholder" class="w-full rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+Not+Found';">
+                    </a>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-600">
+                        <a href="https://app.intangibles.me/vida.html" target="_blank" rel="noopener noreferrer" class="hover:underline">Motivational App</a>
+                    </h3>
+                    <div class="mb-3">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Expo</span>
+                        <span class="tag">AWS Lambda</span>
+                        <span class="tag">GitHub Actions</span>
+                        <span class="tag">AI</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>GitHub Actions CI pipeline for automatic updates.</li>
+                        <li>AWS Lambda for off-device processing of user data.</li>
+                        <li>AI to analyze trends and provide feedback.</li>
+                    </ul>
+                </div>
+
+                <div class="card project-card">
+                    <img src="https://placehold.co/600x400/764BA2/FFFFFF?text=AI+Product+Detector" alt="AI Product Detector Placeholder" class="w-full rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+Not+Found';">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-600">AI Product Detector</h3>
+                    <div class="mb-3">
+                        <span class="tag">Google Cloud Vertex AI</span>
+                        <span class="tag">Mobile</span>
+                        <span class="tag">AI</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm space-y-1 text-gray-600">
+                        <li>Used Google Vertex to train a custom model.</li>
+                        <li>AI identified unique items live via smartphone camera.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-16 px-4 md:px-8">
+        <div class="container mx-auto">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-blue-600">Capgemini – Software Engineer</h3>
+                    <p class="text-gray-500 mb-2">2023 – Present</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Developed bespoke mobile applications for a major UK retailer using Xamarin cross-platform development.</li>
+                        <li>Improved team workflows by introducing Git best practices.</li>
+                        <li>Created automated backend scripts to manage data flow from GCP to client server, increasing throughput by 50%.</li>
+                        <li>Produced presentations on soft skills, AI, and hackathons.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-blue-600">Microsoft – Mentee</h3>
+                    <p class="text-gray-500 mb-2">2022 – 2023</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Enhanced networking and communication skills with a company mentor.</li>
+                        <li>Gained insight into Microsoft’s support structures and business operations.</li>
+                        <li>Completed Microsoft learning for Azure Fundamentals, Data Fundamentals, AI Fundamentals, Security Fundamentals, and Power Platform Fundamentals.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-blue-600">University of Sussex – Teaching Assistant</h3>
+                    <p class="text-gray-500 mb-2">2022 – 2023</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Assisted students with coursework and lab problems.</li>
+                        <li>Provided new perspectives on technical issues in labs.</li>
+                        <li>Adapted teaching to students’ unique learning styles.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-blue-600">Packet Storm Limited – Junior Intern Developer</h3>
+                    <p class="text-gray-500 mb-2">2018 – 2020</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Supported lead developer in various projects and improved testing speed with automation.</li>
+                        <li>Built and set up a local ZFS server with an email alert system.</li>
+                        <li>Created and packaged virtual machines for disposable development environments.</li>
+                        <li>Created documentation and detailed user guides for clients.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hobbies" class="bg-gray-200/70 py-16 px-4 md:px-8">
+        <div class="container mx-auto">
+            <h2 class="section-title">Hobbies & Interests</h2>
+            <div class="max-w-3xl mx-auto glass p-8 rounded-2xl shadow-lg text-center">
+                <p class="text-lg md:text-xl">
+                    I participate in hackathons, repair technology, and volunteer in my spare time. I'm also passionate about sports, leading and playing for a basketball team, and enjoy daily coding challenges with my team.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8 text-center px-4 md:px-8">
+        <div class="container mx-auto">
+            <p>&copy; <span id="currentYear"></span> Henry Adarkwa. All rights reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">London, UK</p>
+            <a href="HenryAdarkwa_CV_2025.docx.pdf" download class="inline-block mt-4 text-blue-300 hover:text-blue-400 underline text-base">
+                <i class="fas fa-file-download mr-2"></i>Download CV (PDF)
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Responsive nav menu toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navMobile = document.getElementById('nav-mobile');
+        navToggle.addEventListener('click', () => {
+            navMobile.classList.toggle('hidden');
+        });
+        // Hide mobile menu on link click
+        document.querySelectorAll('#nav-mobile a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMobile.classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
