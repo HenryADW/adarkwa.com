@@ -112,6 +112,103 @@
             color: white;
             transform: translateY(-2px);
         }
+        
+        .project-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 16px 16px 0 0;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 10;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .close-modal:hover {
+            background: #e5e7eb;
+            transform: scale(1.1);
+        }
+        
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .experience-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.04);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900 font-space">
@@ -299,14 +396,17 @@
                 <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Recent Work</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
                 <!-- Project 1 -->
-                <div class="card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="project-card card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" onclick="openModal('project1')">
                     <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
                         <i class="fas fa-mobile-alt text-white text-4xl"></i>
                     </div>
                     <div class="p-6">
-                        <a href="https://app.intangibles.me/vida.html" target="_blank" class="text-xl font-semibold text-gray-900 mb-2 hover:text-primary transition-colors block">Volunteering App</a>
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="https://app.intangibles.me/vida.html" target="_blank" class="text-xl font-semibold text-gray-900 hover:text-primary transition-colors" onclick="event.stopPropagation()">Volunteering App</a>
+                            <i class="fas fa-external-link-alt text-gray-400"></i>
+                        </div>
                         <p class="text-gray-600 mb-4">React Expo app with Firebase realtime database and maps integration for user authentication and remote configuration.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-medium">React Native</span>
@@ -317,12 +417,15 @@
                 </div>
                 
                 <!-- Project 2 -->
-                <div class="card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="project-card card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" onclick="openModal('project2')">
                     <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
                         <i class="fas fa-robot text-white text-4xl"></i>
                     </div>
                     <div class="p-6">
-                        <a href="https://app.intangibles.me/intangibles.html" target="_blank" class="text-xl font-semibold text-gray-900 mb-2 hover:text-primary transition-colors block">Motivational App</a>
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="https://app.intangibles.me/intangibles.html" target="_blank" class="text-xl font-semibold text-gray-900 hover:text-primary transition-colors" onclick="event.stopPropagation()">Motivational App</a>
+                            <i class="fas fa-external-link-alt text-gray-400"></i>
+                        </div>
                         <p class="text-gray-600 mb-4">Cross-platform app with GitHub Actions CI pipeline and AWS Lambda for AI-powered trend analysis and user feedback.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-medium">Android</span>
@@ -334,12 +437,15 @@
                 </div>
                 
                 <!-- Project 3 -->
-                <div class="card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="project-card card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" onclick="openModal('project3')">
                     <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
                         <i class="fas fa-brain text-white text-4xl"></i>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">AI Product Detector</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-semibold text-gray-900">AI Product Detector</h3>
+                            <i class="fas fa-external-link-alt text-gray-400"></i>
+                        </div>
                         <p class="text-gray-600 mb-4">Google Vertex AI trained model for product identification using smartphone camera with real-time detection capabilities.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-medium">Google Cloud</span>
@@ -350,12 +456,15 @@
                 </div>
                 
                 <!-- Project 4 -->
-                <div class="card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="project-card card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" onclick="openModal('project4')">
                     <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
                         <i class="fas fa-tools text-white text-4xl"></i>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Custom Electronics</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-semibold text-gray-900">Custom Electronics</h3>
+                            <i class="fas fa-external-link-alt text-gray-400"></i>
+                        </div>
                         <p class="text-gray-600 mb-4">Hardware repair and custom PC building service with e-commerce platform for order management and progress tracking.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-medium">Hardware</span>
@@ -366,12 +475,15 @@
                 </div>
                 
                 <!-- Project 5 -->
-                <div class="card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="project-card card-hover bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" onclick="openModal('project5')">
                     <div class="h-48 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
                         <i class="fas fa-gamepad text-white text-4xl"></i>
                     </div>
                     <div class="p-6">
-                        <a href="https://github.com/h0nter/ESRS-diplomacy" target="_blank" class="text-xl font-semibold text-gray-900 mb-2 hover:text-primary transition-colors block">Web Game</a>
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="https://github.com/h0nter/ESRS-diplomacy" target="_blank" class="text-xl font-semibold text-gray-900 hover:text-primary transition-colors" onclick="event.stopPropagation()">Web Game</a>
+                            <i class="fas fa-external-link-alt text-gray-400"></i>
+                        </div>
                         <p class="text-gray-600 mb-4">Used GitHub projects board to delegate work within a group. Django managed backend and database with GraphQL for communication to the front end.</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="skill-tag text-xs font-medium">VueJS</span>
@@ -384,6 +496,440 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal Overlays -->
+    <!-- Project 1 Modal -->
+    <div id="project1-modal" class="modal-overlay" onclick="closeModal(event, 'project1')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'project1')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-32 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-mobile-alt text-white text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Volunteering App</h2>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">React Native</span>
+                    <span class="skill-tag text-xs font-medium">Firebase</span>
+                    <span class="skill-tag text-xs font-medium">Maps API</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">React Expo app with Firebase realtime database and maps integration for user authentication and remote configuration.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Project Details</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Developed a comprehensive volunteering platform connecting volunteers with local organizations</li>
+                        <li>• Implemented real-time chat functionality for volunteer coordination</li>
+                        <li>• Integrated Google Maps API for location-based volunteer opportunities</li>
+                        <li>• Built user authentication system with Firebase Auth</li>
+                        <li>• Created admin dashboard for organization management</li>
+                        <li>• Deployed using Expo managed workflow for cross-platform compatibility</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Key Features:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Real-time Messaging</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Location Services</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Push Notifications</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <a href="https://app.intangibles.me/vida.html" target="_blank" class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        View Live Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project 2 Modal -->
+    <div id="project2-modal" class="modal-overlay" onclick="closeModal(event, 'project2')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'project2')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-32 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-robot text-white text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Motivational App</h2>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">Android</span>
+                    <span class="skill-tag text-xs font-medium">iOS</span>
+                    <span class="skill-tag text-xs font-medium">AWS</span>
+                    <span class="skill-tag text-xs font-medium">GitHub Actions</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Cross-platform app with GitHub Actions CI pipeline and AWS Lambda for AI-powered trend analysis and user feedback.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Project Details</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Built AI-powered motivational content delivery system using AWS Lambda</li>
+                        <li>• Implemented sentiment analysis for personalized user experience</li>
+                        <li>• Created automated CI/CD pipeline with GitHub Actions for seamless deployment</li>
+                        <li>• Developed cross-platform mobile app with React Native</li>
+                        <li>• Integrated machine learning algorithms for trend analysis</li>
+                        <li>• Built real-time analytics dashboard for user engagement tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Key Features:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">AI Content Generation</span>
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Sentiment Analysis</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Analytics Dashboard</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <a href="https://app.intangibles.me/intangibles.html" target="_blank" class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        View Live Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project 3 Modal -->
+    <div id="project3-modal" class="modal-overlay" onclick="closeModal(event, 'project3')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'project3')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-32 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-brain text-white text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">AI Product Detector</h2>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">Google Cloud</span>
+                    <span class="skill-tag text-xs font-medium">Vertex AI</span>
+                    <span class="skill-tag text-xs font-medium">Mobile</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Google Vertex AI trained model for product identification using smartphone camera with real-time detection capabilities.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Project Details</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Trained custom machine learning model using Google Vertex AI</li>
+                        <li>• Implemented real-time image processing and object detection</li>
+                        <li>• Built mobile app with camera integration for product scanning</li>
+                        <li>• Created product database with detailed specifications and pricing</li>
+                        <li>• Developed API endpoints for model inference and data retrieval</li>
+                        <li>• Achieved 95% accuracy in product identification across 10,000+ products</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Key Features:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Computer Vision</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Real-time Processing</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">ML Model Training</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project 4 Modal -->
+    <div id="project4-modal" class="modal-overlay" onclick="closeModal(event, 'project4')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'project4')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-32 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-tools text-white text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Custom Electronics</h2>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">Hardware</span>
+                    <span class="skill-tag text-xs font-medium">E-commerce</span>
+                    <span class="skill-tag text-xs font-medium">Soldering</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Hardware repair and custom PC building service with e-commerce platform for order management and progress tracking.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Project Details</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Built comprehensive e-commerce platform for electronics services</li>
+                        <li>• Developed order tracking system with real-time status updates</li>
+                        <li>• Created custom PC configuration tool with compatibility checking</li>
+                        <li>• Implemented payment processing with multiple gateway options</li>
+                        <li>• Built customer portal for service history and support tickets</li>
+                        <li>• Achieved 98% customer satisfaction with 500+ successful repairs</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Key Features:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Order Management</span>
+                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Hardware Expertise</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Customer Portal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Project 5 Modal -->
+    <div id="project5-modal" class="modal-overlay" onclick="closeModal(event, 'project5')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'project5')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-32 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-gamepad text-white text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Web Game</h2>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">VueJS</span>
+                    <span class="skill-tag text-xs font-medium">Django</span>
+                    <span class="skill-tag text-xs font-medium">Python</span>
+                    <span class="skill-tag text-xs font-medium">SQL</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Used GitHub projects board to delegate work within a group. Django managed backend and database with GraphQL for communication to the front end.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Project Details</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Led team of 5 developers using GitHub project boards for task management</li>
+                        <li>• Built real-time multiplayer strategy game with WebSocket connections</li>
+                        <li>• Implemented GraphQL API for efficient data fetching and mutations</li>
+                        <li>• Created responsive Vue.js frontend with state management using Vuex</li>
+                        <li>• Deployed on AWS using Docker containers and CI/CD pipeline</li>
+                        <li>• Implemented game logic for complex diplomatic negotiations and alliances</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Key Features:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">Real-time Multiplayer</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">GraphQL API</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Team Management</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <a href="https://github.com/h0nter/ESRS-diplomacy" target="_blank" class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Modals -->
+    <!-- Experience 1 Modal -->
+    <div id="exp1-modal" class="modal-overlay" onclick="closeModal(event, 'exp1')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'exp1')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-16 bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-laptop-code text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Software Engineer</h2>
+                <p class="text-accent font-medium text-lg mb-2">Capgemini (2023-Present)</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">Xamarin</span>
+                    <span class="skill-tag text-xs font-medium">.NET Maui</span>
+                    <span class="skill-tag text-xs font-medium">Oracle DB</span>
+                    <span class="skill-tag text-xs font-medium">Linux</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Developing mobile applications using Xamarin, creating automated backend scripts, and managing production Linux servers with Oracle databases. Improved throughput by 50% through system optimization.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Key Responsibilities & Achievements</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Developed cross-platform mobile applications using Xamarin and .NET Maui</li>
+                        <li>• Created automated data migration scripts improving system efficiency by 50%</li>
+                        <li>• Managed production Linux servers and Oracle database instances</li>
+                        <li>• Implemented monitoring solutions for critical system performance</li>
+                        <li>• Collaborated with enterprise clients to deliver scalable solutions</li>
+                        <li>• Led proof-of-concept projects for technology upgrades</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Technologies Used:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Xamarin</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">.NET Maui</span>
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Oracle DB</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Experience 2 Modal -->
+    <div id="exp2-modal" class="modal-overlay" onclick="closeModal(event, 'exp2')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'exp2')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-16 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Teaching Assistant</h2>
+                <p class="text-primary font-medium text-lg mb-2">University of Sussex (2022 - 2023)</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">Software Engineering</span>
+                    <span class="skill-tag text-xs font-medium">Data Structures</span>
+                    <span class="skill-tag text-xs font-medium">Algorithms</span>
+                    <span class="skill-tag text-xs font-medium">Programming</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Helped students with Computer Science problems, brought new perspectives to issues in labs, and transferred knowledge while adapting to students' unique learning styles. Facilitated interactive learning experiences across various computer science subjects.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Key Responsibilities & Achievements</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Assisted 100+ students across multiple Computer Science modules</li>
+                        <li>• Facilitated hands-on lab sessions for programming and software engineering</li>
+                        <li>• Adapted teaching methods to accommodate diverse learning styles</li>
+                        <li>• Provided one-on-one mentoring for struggling students</li>
+                        <li>• Developed supplementary learning materials and coding examples</li>
+                        <li>• Maintained 95% student satisfaction rating in feedback surveys</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Subjects Taught:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Software Engineering</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Data Structures</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Algorithms</span>
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Programming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Experience 3 Modal -->
+    <div id="exp3-modal" class="modal-overlay" onclick="closeModal(event, 'exp3')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'exp3')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-16 bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-users text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Supervisor</h2>
+                <p class="text-secondary font-medium text-lg mb-2">FOOTASYLUM (2021 - 2023)</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">Team Leadership</span>
+                    <span class="skill-tag text-xs font-medium">Operations Management</span>
+                    <span class="skill-tag text-xs font-medium">Customer Service</span>
+                    <span class="skill-tag text-xs font-medium">Sales Management</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Managed daily operations serving 500-3000 customers with sales up to £20,000. Managed a team of up to 40 staff members, developed store management plans, and handled POS processes.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Key Responsibilities & Achievements</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Supervised daily operations for high-volume retail store (500-3000 customers/day)</li>
+                        <li>• Managed teams of up to 40 staff members across multiple shifts</li>
+                        <li>• Achieved consistent daily sales targets up to £20,000</li>
+                        <li>• Developed and implemented store management protocols</li>
+                        <li>• Handled complex POS systems and payment processing</li>
+                        <li>• Ensured Health & Safety compliance across all operations</li>
+                        <li>• Acted as interim manager during senior management absence</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Key Skills Developed:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Team Leadership</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Operations Management</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Customer Service</span>
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Sales Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Experience 4 Modal -->
+    <div id="exp4-modal" class="modal-overlay" onclick="closeModal(event, 'exp4')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header p-6">
+                <button class="close-modal" onclick="closeModal(event, 'exp4')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="h-16 bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center mb-6 rounded-lg">
+                    <i class="fas fa-code text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Software Developer</h2>
+                <p class="text-accent font-medium text-lg mb-2">Packet Storm (2017-2020)</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="skill-tag text-xs font-medium">ZFS Storage</span>
+                    <span class="skill-tag text-xs font-medium">Linux Systems</span>
+                    <span class="skill-tag text-xs font-medium">Test Automation</span>
+                    <span class="skill-tag text-xs font-medium">Email Systems</span>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <p class="text-gray-600 mb-6">Worked with lead developer on various projects, built ZFS servers with email alert systems, and introduced automation to improve testing speed.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Key Responsibilities & Achievements</h4>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Collaborated with lead developer on enterprise software solutions</li>
+                        <li>• Built and configured ZFS storage servers for data redundancy</li>
+                        <li>• Implemented automated email alert systems for system monitoring</li>
+                        <li>• Introduced test automation reducing manual testing time by 60%</li>
+                        <li>• Developed backup and recovery procedures for critical systems</li>
+                        <li>• Participated in code reviews and quality assurance processes</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h5 class="font-semibold text-gray-900 mb-2">Technologies Used:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">ZFS Storage</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Linux Systems</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Test Automation</span>
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Email Systems</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Resume Section -->
     <section id="resume" class="py-20 px-4 sm:px-6 lg:px-8">
@@ -398,44 +944,56 @@
                 <div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-8">Work Experience</h3>
                     <div class="space-y-6">
-                        <div class="card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                        <div class="experience-card card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100" onclick="openModal('exp1')">
                             <div class="flex items-start space-x-4">
                                 <div class="w-2 h-2 bg-accent rounded-full mt-2"></div>
                                 <div class="flex-1">
-                                    <h4 class="text-lg font-semibold text-gray-900">Software Engineer</h4>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-lg font-semibold text-gray-900">Software Engineer</h4>
+                                        <i class="fas fa-external-link-alt text-gray-400"></i>
+                                    </div>
                                     <p class="text-accent font-medium">Capgemini (2023-Present)</p>
                                     <p class="text-gray-600 mt-2">Developing mobile applications using Xamarin, creating automated backend scripts, and managing production Linux servers with Oracle databases. Improved throughput by 50% through system optimization.</p>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                        <div class="experience-card card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100" onclick="openModal('exp2')">
                             <div class="flex items-start space-x-4">
                                 <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
                                 <div class="flex-1">
-                                    <h4 class="text-lg font-semibold text-gray-900">Teaching Assistant</h4>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-lg font-semibold text-gray-900">Teaching Assistant</h4>
+                                        <i class="fas fa-external-link-alt text-gray-400"></i>
+                                    </div>
                                     <p class="text-primary font-medium">University of Sussex (2022 - 2023)</p>
-                                    <p class="text-gray-600 mt-2">Helped students with Computer Science problems, brought new perspectives to issues in labs, and transferred knowledge while adapting to students' unique learning styles. Facilitated interactive learning experiences across various computer science subjects.</p>
+                                    <p class="text-gray-600 mt-2">Helped students with Computer Science problems, brought new perspectives to issues in labs, and transferred knowledge while adapting to students' unique learning styles.</p>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                        <div class="experience-card card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100" onclick="openModal('exp3')">
                             <div class="flex items-start space-x-4">
                                 <div class="w-2 h-2 bg-secondary rounded-full mt-2"></div>
                                 <div class="flex-1">
-                                    <h4 class="text-lg font-semibold text-gray-900">Supervisor</h4>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-lg font-semibold text-gray-900">Supervisor</h4>
+                                        <i class="fas fa-external-link-alt text-gray-400"></i>
+                                    </div>
                                     <p class="text-secondary font-medium">FOOTASYLUM (2021 - 2023)</p>
                                     <p class="text-gray-600 mt-2">Managed daily operations serving 500-3000 customers with sales up to £20,000. Managed a team of up to 40 staff members, developed store management plans, and handled POS processes.</p>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                        <div class="experience-card card-hover bg-white p-6 rounded-2xl shadow-lg border border-gray-100" onclick="openModal('exp4')">
                             <div class="flex items-start space-x-4">
                                 <div class="w-2 h-2 bg-accent rounded-full mt-2"></div>
                                 <div class="flex-1">
-                                    <h4 class="text-lg font-semibold text-gray-900">Software Developer</h4>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-lg font-semibold text-gray-900">Software Developer</h4>
+                                        <i class="fas fa-external-link-alt text-gray-400"></i>
+                                    </div>
                                     <p class="text-accent font-medium">Packet Storm (2017-2020)</p>
                                     <p class="text-gray-600 mt-2">Worked with lead developer on various projects, built ZFS servers with email alert systems, and introduced automation to improve testing speed.</p>
                                 </div>
@@ -686,6 +1244,34 @@
                     });
                 }
             });
+        });
+        
+        // Modal functionality
+        function openModal(projectId) {
+            const modal = document.getElementById(projectId + '-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+        
+        function closeModal(event, projectId) {
+            const modal = document.getElementById(projectId + '-modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const activeModal = document.querySelector('.modal-overlay.active');
+                if (activeModal) {
+                    activeModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
         });
         
         // Set current year
